@@ -44,32 +44,15 @@ resource dev3 "Peter Green" {
 }
 resource dev4 "Alejandro Lopez" {
   email "845154@unizar.es"
+  shift dev4Shift {
+    workinghours mon-fri 4:00-8:00
+  }
 }
 
 task WMGame "Web & Mobile Game" {
   chargeset manag
   charge 60 perday
   responsible boss
-
-  task tmobileF "Mobile Front-End" {
-    chargeset mFront
-    responsible dev3
-    depends WMGame.tback.tBEd
-    task tGUIdM "Mobile GUI Design" {
-      effort 10d
-      allocate dev3, dev4
-    }
-    task tFEm "Mobile Front-End Construction" {
-      effort 18d
-      allocate dev2, dev3, dev4
-      depends WMGame.tmobileF.tGUIdM
-    }
-    task tFEtM "Mobile Front-End Test" {
-      effort 7d
-      allocate dev1, dev4
-      depends WMGame.tmobileF.tFEm
-    }
-  }
 
   task tgdesign "General System Design" {
       effort 2d
