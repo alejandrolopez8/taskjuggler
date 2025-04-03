@@ -46,21 +46,30 @@ resource dev4 "Alejandro Lopez" {
   email "845154@unizar.es"
 }
 
-# Now we specify the work packages. The whole project is described as
-# a task that contains subtasks. These subtasks are then broken down
-# into smaller tasks and so on. The innermost tasks describe the real
-# work and have resources allocated to them. Many attributes of tasks
-# are inherited from the enclosing task. This saves you a lot of typing.
 task WMGame "Web & Mobile Game" {
-
-  # All work-related costs will be booked to this account unless the
-  # subtasks specify something different.
   chargeset manag
-  
-  # For the duration of the project we have running cost that are not
-  # included in the labor cost.
   charge 60 perday
   responsible boss
+
+  task tmobileF "Mobile Front-End" {
+    chargeset mFront
+    responsible dev3
+    depends WMGame.tback.tBEd
+    task tGUIdM "Mobile GUI Design" {
+      effort 10d
+      allocate dev3, dev4
+    }
+    task tFEm "Mobile Front-End Construction" {
+      effort 18d
+      allocate dev2, dev3, dev4
+      depends WMGame.tmobileF.tGUIdM
+    }
+    task tFEtM "Mobile Front-End Test" {
+      effort 7d
+      allocate dev1, dev4
+      depends WMGame.tmobileF.tFEm
+    }
+  }
 
   task tgdesign "General System Design" {
       effort 2d
