@@ -44,9 +44,6 @@ resource dev3 "Peter Green" {
 }
 resource dev4 "Alejandro Lopez" {
   email "845154@unizar.es"
-  shift dev4Shift {
-    workinghours mon-fri 4:00-8:00
-  }
 }
 
 task WMGame "Web & Mobile Game" {
